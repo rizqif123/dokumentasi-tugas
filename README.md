@@ -1,100 +1,111 @@
-# dokumentasi-tugas
-
+Tentu! Berikut adalah dokumentasi lengkap untuk proyek **Integrasi Webhook dengan n8n dan Flask** yang siap kamu gunakan di GitHub. Dokumentasi ini akan mencakup semua langkah dari setup hingga cara menjalankan dan testing.
 
 ---
 
-## 📄 `README.md`
+## 📄 **README.md**
 
 ```markdown
 # 🌐 Integrasi Webhook dengan n8n + Flask
 
-Proyek ini menunjukkan integrasi webhook menggunakan [n8n](https://n8n.io/) dan Python Flask, dengan callback ke server lokal yang di-expose menggunakan [ngrok](https://ngrok.com/).
+Proyek ini adalah contoh integrasi antara **n8n**, **Flask**, dan **ngrok**. Sistem ini mengirim data melalui webhook ke n8n dan menerima callback yang diproses oleh Flask.
 
 ---
 
 ## 🎯 Tujuan
 
 - Mengirim payload dari client ke webhook n8n.
-- n8n memproses data dan mengirim balik ke URL callback.
-- Flask menerima callback dan mencatat respons.
+- n8n memproses data dan mengirim balasan ke URL callback yang diatur oleh Flask.
+- Flask menerima callback dan merespons dengan data yang diproses.
 
 ---
 
-## 🛠️ Tools yang Digunakan
+## 🛠️ **Tools yang Digunakan**
 
-- Python + Flask
-- ngrok
-- n8n (melalui Avataralabs)
-- Postman (untuk testing)
+- **Python**: Bahasa pemrograman untuk server.
+- **Flask**: Framework untuk membuat API server.
+- **ngrok**: Digunakan untuk membuat tunnel ke server lokal (Flask) agar dapat diakses dari luar jaringan.
+- **n8n**: Platform otomasi yang akan menerima webhook dan mengirimkan callback.
+- **Postman**: Untuk testing API.
 
 ---
 
-## 🚀 Cara Menjalankan
+## 🚀 **Cara Menjalankan Proyek**
 
-### 1. Clone Repository
+### 1. **Clone Repository**
 
 ```bash
 git clone https://github.com/rizqif123/n8n-flask-webhook.git
 cd n8n-flask-webhook
 ```
 
-### 2. Install Flask
+### 2. **Install Flask**
+
+Instal **Flask** di sistem kamu:
 
 ```bash
 pip install flask
 ```
 
-### 3. Jalankan Server Flask
+### 3. **Menjalankan Server Flask**
+
+Setelah dependensi terinstal, jalankan server Flask:
 
 ```bash
 python app.py
 ```
 
-Server akan berjalan di `http://localhost:5000`.
+Flask akan berjalan di `http://localhost:5000`.
 
-### 4. Jalankan ngrok
+### 4. **Jalankan ngrok**
+
+Buka terminal baru dan jalankan **ngrok** untuk membuat tunnel ke server Flask:
 
 ```bash
 ngrok http 5000
 ```
 
-Salin URL HTTPS dari ngrok, misalnya:
+ngrok akan memberikan URL seperti:
 ```
-https://xxxxxx.ngrok-free.app
+https://ff74-103-175-236-31.ngrok-free.app/callback
 ```
+Salin URL ini karena akan digunakan sebagai URL callback untuk n8n.
 
 ---
 
-## 🔧 Konfigurasi Workflow di n8n
+## 🔧 **Konfigurasi Workflow di n8n**
 
-1. Masuk ke [https://n8n.avataralabs.ai](https://n8n.avataralabs.ai).
+1. Masuk ke [n8n Avataralabs](https://n8n.avataralabs.ai).
 2. Buat **Webhook node**:
    - Path: `/test-webhook`
    - Method: `POST`
 3. Tambahkan **HTTP Request node**:
    - Method: `POST`
-   - URL: `{{$json["callback"]}}`
+   - URL: `{{$json["callback"]}}` (URL callback dari ngrok)
    - Content Type: `JSON`
    - Body Parameters:
      - Key: `message`
      - Value: `Hello again!`
-4. Hubungkan Webhook → HTTP Request
+4. Hubungkan **Webhook** → **HTTP Request**
 5. Klik tombol **Activate** (pojok kanan atas)
 
 ---
 
-## 🧪 Testing via Postman
+## 🧪 **Testing via Postman**
 
-- URL:
+Untuk mengirimkan data ke webhook n8n, gunakan **Postman** atau alat lainnya.
+
+### Konfigurasi Postman:
+
+- **URL**:
   ```
   https://n8n.avataralabs.ai/webhook/test-webhook
   ```
-- Method: `POST`
-- Headers:
+- **Method**: `POST`
+- **Headers**:
   ```
   Content-Type: application/json
   ```
-- Body (JSON):
+- **Body (JSON)**:
   ```json
   {
     "message": "Halo, n8n",
@@ -102,27 +113,22 @@ https://xxxxxx.ngrok-free.app
   }
   ```
 
-### ✅ Hasil:
-- n8n mengirim `POST` ke endpoint callback Flask kamu.
-- Flask akan mencetak:
-  ```
-  Callback received: {'message': 'Hello again!'}
-  ```
+Klik **Send** untuk mengirimkan data ke n8n.
 
 ---
 
-## 📁 Struktur Proyek
+## 📂 **Struktur Folder**
 
 ```
 n8n-flask-webhook/
-├── app.py          # Server Flask
-├── README.md       # Dokumentasi
-└── requirements.txt (opsional)
+├── app.py                # Server Flask
+├── README.md             # Dokumentasi ini
+└── requirements.txt      # Daftar dependensi (opsional)
 ```
 
 ---
 
-## 📄 Contoh app.py
+## 🧰 **Contoh Kode app.py (Flask)**
 
 ```python
 from flask import Flask, request, jsonify
@@ -144,18 +150,30 @@ if __name__ == "__main__":
 
 ---
 
-## 📌 Catatan
+## 📑 **requirements.txt**
 
-- Workflow di n8n harus diaktifkan.
-- Endpoint callback Flask harus terbuka melalui ngrok.
-- Pastikan ngrok dan Flask berjalan bersamaan selama testing.
+Untuk memudahkan orang lain dalam menginstal dependensi, buatlah file `requirements.txt`. Isinya adalah sebagai berikut:
 
----
-
-## ✍️ Author
-
-Dibuat oleh [@username](https://github.com/username)  
-Untuk keperluan pengujian webhook dengan n8n 🚀
+```
+flask
 ```
 
 ---
+
+## 📌 **Catatan Tambahan**
+
+- Pastikan workflow di **n8n** diaktifkan (toggle ON).
+- **ngrok** harus berjalan agar server Flask dapat diakses secara publik.
+- Endpoint Flask `/callback` hanya menerima request **POST** untuk webhook.
+
+---
+
+## 🔄 **Proses Callback**
+
+Saat kamu mengirimkan data ke **n8n**, n8n akan mengirimkan request POST ke **callback URL** yang telah ditentukan. Server Flask akan mencetak payload yang diterima dan mengembalikan response JSON:
+
+```json
+{
+  "message": "Halo Lagi!"
+}
+```

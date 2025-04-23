@@ -70,15 +70,9 @@ Untuk mengirimkan data ke webhook n8n, gunakan **Postman** atau alat lainnya.
 
 ### Konfigurasi Postman:
 
-- **URL**:
-  ```
-  https://n8n.avataralabs.ai/webhook/test-webhook
-  ```
+- **URL**: https://n8n.avataralabs.ai/webhook/test-webhook
 - **Method**: `POST`
-- **Headers**:
-  ```
-  Content-Type: application/json
-  ```
+- **Headers**: Content-Type: application/json
 - **Body (JSON)**:
   ```json
   {

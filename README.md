@@ -43,7 +43,7 @@ pip install flask
 Setelah dependensi terinstal, jalankan server Flask:
 
 ```bash
-python app.py
+python server.py
 ```
 
 Flask akan berjalan di `http://localhost:5000`.

@@ -35,21 +35,7 @@ Proyek ini adalah contoh integrasi antara **n8n**, **Flask**, dan **ngrok**. Sis
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#🚀 **Cara Menjalankan Proyek**
+Cara Menjalankan Proyek
 
 
 1. install flask

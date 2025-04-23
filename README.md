@@ -5,10 +5,6 @@
 ```markdown
 # 🌐 Integrasi Webhook dengan n8n + Flask
 
-Proyek ini adalah contoh integrasi antara **n8n**, **Flask**, dan **ngrok**. Sistem ini mengirim data melalui webhook ke n8n dan menerima callback yang diproses oleh Flask.
-
----
-
 ## 🎯 Tujuan
 
 - Mengirim payload dari client ke webhook n8n.

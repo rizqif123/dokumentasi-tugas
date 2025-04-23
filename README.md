@@ -1,6 +1,4 @@
-Tentu! Berikut adalah dokumentasi lengkap untuk proyek **Integrasi Webhook dengan n8n dan Flask** yang siap kamu gunakan di GitHub. Dokumentasi ini akan mencakup semua langkah dari setup hingga cara menjalankan dan testing.
 
----
 
 ## 📄 **README.md**
 
@@ -29,24 +27,18 @@ Proyek ini adalah contoh integrasi antara **n8n**, **Flask**, dan **ngrok**. Sis
 
 ---
 
-## 🚀 **Cara Menjalankan Proyek**
+#🚀 **Cara Menjalankan Proyek**
 
-### 1. **Clone Repository**
 
-```bash
-git clone https://github.com/rizqif123/n8n-flask-webhook.git
-cd n8n-flask-webhook
-```
+1. install flask
 
-### 2. **Install Flask**
-
-Instal **Flask** di sistem kamu:
+Instal **Flask** :
 
 ```bash
 pip install flask
 ```
 
-### 3. **Menjalankan Server Flask**
+2. Menjalankan Server Flask
 
 Setelah dependensi terinstal, jalankan server Flask:
 
@@ -56,7 +48,7 @@ python app.py
 
 Flask akan berjalan di `http://localhost:5000`.
 
-### 4. **Jalankan ngrok**
+3. Jalankan ngrok
 
 Buka terminal baru dan jalankan **ngrok** untuk membuat tunnel ke server Flask:
 
@@ -69,24 +61,6 @@ ngrok akan memberikan URL seperti:
 https://ff74-103-175-236-31.ngrok-free.app/callback
 ```
 Salin URL ini karena akan digunakan sebagai URL callback untuk n8n.
-
----
-
-## 🔧 **Konfigurasi Workflow di n8n**
-
-1. Masuk ke [n8n Avataralabs](https://n8n.avataralabs.ai).
-2. Buat **Webhook node**:
-   - Path: `/test-webhook`
-   - Method: `POST`
-3. Tambahkan **HTTP Request node**:
-   - Method: `POST`
-   - URL: `{{$json["callback"]}}` (URL callback dari ngrok)
-   - Content Type: `JSON`
-   - Body Parameters:
-     - Key: `message`
-     - Value: `Hello again!`
-4. Hubungkan **Webhook** → **HTTP Request**
-5. Klik tombol **Activate** (pojok kanan atas)
 
 ---
 
@@ -108,8 +82,8 @@ Untuk mengirimkan data ke webhook n8n, gunakan **Postman** atau alat lainnya.
 - **Body (JSON)**:
   ```json
   {
-    "message": "Halo, n8n",
-    "callback": "https://xxxxxx.ngrok-free.app/callback"
+    "message": "Hello, n8n",
+    "callback": "https://ff74-103-175-236-31.ngrok-free.app/callback"
   }
   ```
 
@@ -148,25 +122,6 @@ if __name__ == "__main__":
     app.run(port=5000)
 ```
 
----
-
-## 📑 **requirements.txt**
-
-Untuk memudahkan orang lain dalam menginstal dependensi, buatlah file `requirements.txt`. Isinya adalah sebagai berikut:
-
-```
-flask
-```
-
----
-
-## 📌 **Catatan Tambahan**
-
-- Pastikan workflow di **n8n** diaktifkan (toggle ON).
-- **ngrok** harus berjalan agar server Flask dapat diakses secara publik.
-- Endpoint Flask `/callback` hanya menerima request **POST** untuk webhook.
-
----
 
 ## 🔄 **Proses Callback**
 

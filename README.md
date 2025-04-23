@@ -127,6 +127,6 @@ Saat kamu mengirimkan data ke **n8n**, n8n akan mengirimkan request POST ke **ca
 
 ```json
 {
-  "message": "Halo Lagi!"
+  "message": "Hello again!"
 }
 ```
